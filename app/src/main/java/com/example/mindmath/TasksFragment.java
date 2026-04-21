@@ -3,7 +3,8 @@ package com.example.mindmath;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.graphics.shapes.Feature;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,6 +80,8 @@ public class TasksFragment extends Fragment {
         }
     }
 
+    int correctAnswers = 0;
+
     QuestionQueue questionQueue;
 
     @Override
@@ -88,7 +91,7 @@ public class TasksFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tasks, container, false);
 
         nextButton = view.findViewById(R.id.nextButton);
-        skipButton = view.findViewById(R.id.skipButton);
+        skipButton = view.findViewById(R.id.mainPageButton);
         questionTextView = view.findViewById(R.id.questionTextView);
         answerEditText = view.findViewById(R.id.answerEditText);
         attemptsTextView = view.findViewById(R.id.attemptsTextView);
@@ -119,12 +122,16 @@ public class TasksFragment extends Fragment {
                     answerEditText.setText("");
 
                     Question next = questionQueue.getCurrentQuestion();
+
+                    if (current.getAttempts() == 3) {
+                        correctAnswers++;
+                    }
+
                     if (next != null) {
                         updateQuestion(questionTextView, next.getEquation());
                         attemptsTextView.setText("");
                     } else {
-                        questionTextView.setText("Конец заданий");
-                        nextButton.setEnabled(false);
+                        loadFragment(new TaskStatsFragment());
                     }
                 } else {
                     int attempts = current.getAttempts() - 1;
@@ -137,10 +144,8 @@ public class TasksFragment extends Fragment {
                         Question next = questionQueue.getCurrentQuestion();
                         if (next != null) {
                             updateQuestion(questionTextView, next.getEquation());
-
                         } else {
-                            questionTextView.setText("");
-                            nextButton.setEnabled(false); // От греха подальше
+                            loadFragment(new TaskStatsFragment());
                         }
                     } else {
                         attemptsTextView.setText(String.valueOf(attempts));
@@ -167,5 +172,14 @@ public class TasksFragment extends Fragment {
 
     private void updateQuestionNum(TextView questionNum, int number) {
         questionNum.setText(number);
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fm = getParentFragmentManager();
+
+        fm.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
     }
 }
