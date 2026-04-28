@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Results"
+        android:text="Результаты"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/timeLayout"
@@ -48,7 +48,7 @@
                 android:id="@+id/timeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="avg time"
+                android:text="Среднее время ответа"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
@@ -103,7 +103,7 @@
                 android:id="@+id/correlationLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="correlation"
+                android:text="Правильные ответы"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
@@ -158,7 +158,7 @@
                 android:id="@+id/streakLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="streak"
+                android:text="Отеветы подряд"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
@@ -198,7 +198,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="4dp"
             android:layout_weight="1"
-            android:text="To main"
+            android:text="На главную"
             android:textColor="#FFFFFF"
             app:backgroundTint="@color/outline"
             app:cornerRadius="5dp"
@@ -214,7 +214,7 @@
             android:layout_marginHorizontal="4dp"
             android:layout_weight="1"
             android:foregroundTint="@color/primary"
-            android:text="next"
+            android:text="Далее"
             android:textColor="#FFFFFF"
             app:backgroundTint="@color/primary"
             app:cornerRadius="5dp"

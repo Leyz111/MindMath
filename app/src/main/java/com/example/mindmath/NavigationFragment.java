@@ -83,9 +83,13 @@ public class NavigationFragment extends Fragment {
         animator.start();
     }
 
+    private Fragment currentFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
 
         View v = inflater.inflate(R.layout.fragment_navigation, container, false);
 
@@ -98,22 +102,31 @@ public class NavigationFragment extends Fragment {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchSelected(homeButton, tasksButton, accountButton);
-                loadFragment(new HomeFragment());
+                if (!(currentFragment instanceof HomeFragment)) {
+                    currentFragment = new HomeFragment();
+                    switchSelected(homeButton, tasksButton, accountButton);
+                    loadFragment(new HomeFragment());
+                }
             }
         });
         tasksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchSelected(tasksButton, homeButton, accountButton);
-                loadFragment(new TasksFragment());
+                if (!(currentFragment instanceof TasksFragment)) {
+                    currentFragment = new TasksFragment();
+                    switchSelected(tasksButton, homeButton, accountButton);
+                    loadFragment(new TasksFragment());
+                }
             }
         });
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchSelected(accountButton, homeButton, tasksButton);
-                loadFragment(new AccountFragment());
+                if (!(currentFragment instanceof AccountFragment)) {
+                    currentFragment = new AccountFragment();
+                    switchSelected(accountButton, homeButton, tasksButton);
+                    loadFragment(new AccountFragment());
+                }
             }
         });
         return v;

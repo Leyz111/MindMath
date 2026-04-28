@@ -39,7 +39,6 @@ public class TasksFragment extends Fragment {
     ArrayList<Question> queue = new ArrayList<>();
 
 
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -101,7 +100,6 @@ public class TasksFragment extends Fragment {
         queue.add(q2);
         queue.add(q3);
         queue.add(q4);
-
 
 
         questionQueue = new QuestionQueue(queue);
