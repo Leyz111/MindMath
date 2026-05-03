@@ -3,10 +3,13 @@ package com.example.mindmath;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +26,8 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button leaderboardButton, hiButton;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -58,7 +63,35 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+
+        View v =  inflater.inflate(R.layout.fragment_home, container, false);
+
+        leaderboardButton = v.findViewById(R.id.lead_btn);
+        hiButton = v.findViewById(R.id.btn_hi);
+
+        leaderboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new LeadersFragment());
+            }
+        });
+
+        hiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new TrainingListFragment());
+            }
+        });
+
+        return v;
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fm = getParentFragmentManager();
+
+        fm.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
     }
 }

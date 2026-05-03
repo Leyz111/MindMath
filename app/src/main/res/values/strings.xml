@@ -1,5 +1,40 @@
 <resources>
     <string name="app_name">MindMath</string>
+    <string name="welcome">Проходи тренировки и попадай в таблицу лидеров</string>
+    <string name="table">Таблица лидеров</string>
+
+    <string name="lead_1_pos">1</string>
+    <string name="lead_2_pos">2</string>
+    <string name="lead_3_pos">3</string>
+    <string name="lead_4_pos">4</string>
+    <string name="lead_5_pos">5</string>
+    <string name="lead_6_pos">6</string>
+    <string name="lead_7_pos">7</string>
+    <string name="main_list">Главная</string>
+    <string name="tasks">Задания</string>
+    <string name="account">Аккаунт</string>
+    <string name="header_tv">Проходи тренировки и\nпопадай в таблицу лидеров</string>
+    <string name="cup">Cup</string>
+    <string name="leaders_tv">Таблица лидеров</string>
+    <string name="lead_btn">Подробнее</string>
+    <string name="tv_hi">Приветствуем</string>
+    <string name="iv_hi">Greeting</string>
+    <string name="series">Серия</string>
+    <string name="achievements">Достижения</string>
+    <string name="tv_statistics">Статистика</string>
+    <string name="tv_hi_2">Новые задания уже ждут \n Вас!</string>
+    <string name="btn_hi">Перейти к тренировкам</string>
+    <string name="tv_streak">Серия</string>
+    <string name="tv_streak_2">Увеличивай серию, тренируясь каждый день</string>
+    <string name="btn_streak">Узнать больше о серии</string>
+    <string name="tv_ach_1">Достижения</string>
+    <string name="tv_ach_2">Забирай награды за свой \n труд</string>
+    <string name="btn_ach">Просмотреть достижения</string>
+    <string name="tv_stat_1">Статистика</string>
+    <string name="tv_stat_2">Результаты тренировок за \n сегодня</string>
+    <string name="tv_training">Тренировка</string>
+    <string name="btn_training_1">Перейти к заданиям</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

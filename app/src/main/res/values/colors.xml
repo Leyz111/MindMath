@@ -6,5 +6,14 @@
     <color name="on_surface">#191c20</color>
     <color name="outline">#73777f</color>
 
-
+    <color name="header_tv">#D1E4FF</color>
+    <color name="tran_black">#191C20</color>
+    <color name="onahau">#BBE9FF</color>
+    <color name="gray">#73777F</color>
+    <color name="dark_blue">#35618e</color>
+    <color name="gold">#F2FF00</color>
+    <color name="silver">#797979</color>
+    <color name="bronze">#C87B32</color>
+    <color name="black_border">#191C20</color>
+    <color name="warning">#93000A</color>
 </resources>

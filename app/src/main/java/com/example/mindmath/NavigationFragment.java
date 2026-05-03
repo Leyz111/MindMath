@@ -83,7 +83,7 @@ public class NavigationFragment extends Fragment {
         animator.start();
     }
 
-    private Fragment currentFragment;
+    public Fragment currentFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -112,10 +112,10 @@ public class NavigationFragment extends Fragment {
         tasksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!(currentFragment instanceof TasksFragment)) {
-                    currentFragment = new TasksFragment();
+                if (!(currentFragment instanceof TrainingListFragment)) {
+                    currentFragment = new TrainingListFragment();
                     switchSelected(tasksButton, homeButton, accountButton);
-                    loadFragment(new TasksFragment());
+                    loadFragment(new TrainingListFragment());
                 }
             }
         });

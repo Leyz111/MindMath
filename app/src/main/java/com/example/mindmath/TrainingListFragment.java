@@ -5,27 +5,18 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-
-import com.example.mindmath.leaderboard.LeaderboardUser;
-import com.example.mindmath.leaderboard.LeaderboardUserAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link LeadersFragment#newInstance} factory method to
+ * Use the {@link TrainingListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LeadersFragment extends Fragment {
+public class TrainingListFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,11 +27,11 @@ public class LeadersFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ImageButton backButton;
-
-    public LeadersFragment() {
+    public TrainingListFragment() {
         // Required empty public constructor
     }
+
+    Button toTasksButton;
 
     /**
      * Use this factory method to create a new instance of
@@ -48,11 +39,11 @@ public class LeadersFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LeadersFragment.
+     * @return A new instance of fragment TrainingListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LeadersFragment newInstance(String param1, String param2) {
-        LeadersFragment fragment = new LeadersFragment();
+    public static TrainingListFragment newInstance(String param1, String param2) {
+        TrainingListFragment fragment = new TrainingListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,30 +64,18 @@ public class LeadersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_leaders, container, false);
+        View v = inflater.inflate(R.layout.fragment_training_list, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        toTasksButton = v.findViewById(R.id.btn_training_1);
 
-        List<LeaderboardUser> userList = new ArrayList<>();
-        userList.add(new LeaderboardUser(1, "Иванов Иван"));
-        userList.add(new LeaderboardUser(2, "Иванов Ваня"));
-        userList.add(new LeaderboardUser(3, "кто то еще..."));
-
-        LeaderboardUserAdapter adapter = new LeaderboardUserAdapter(userList);
-        try {
-            recyclerView.setAdapter(adapter);
-        } catch (Exception e) {}
-
-        backButton = view.findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        toTasksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(new HomeFragment());
+                loadFragment(new TasksFragment());
             }
         });
 
-        return view;
+        return v;
     }
 
     private void loadFragment(Fragment fragment) {
