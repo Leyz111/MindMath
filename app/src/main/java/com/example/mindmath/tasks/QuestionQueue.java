@@ -4,10 +4,15 @@ import java.util.ArrayList;
 
 public class QuestionQueue {
     private ArrayList<Question> mainQueue = new ArrayList<>();
-    private ArrayList<Question> skippedQueue = new ArrayList<>();
+    private final ArrayList<Question> skippedQueue = new ArrayList<>();
     private Question currentQuestion;
 
     private int questionNumber = 0;
+
+    public QuestionQueue(ArrayList<Question> questions) {
+        this.mainQueue = questions;
+        this.currentQuestion = mainQueue.get(0);
+    }
 
     public void nextQuestion() {
         if (questionNumber + 1 < mainQueue.size()) {
@@ -32,11 +37,6 @@ public class QuestionQueue {
         } else {
             currentQuestion = null;
         }
-    }
-
-    public QuestionQueue(ArrayList<Question> questions) {
-        this.mainQueue = questions;
-        this.currentQuestion = mainQueue.get(0);
     }
 
     public int getQuestionNumber() {

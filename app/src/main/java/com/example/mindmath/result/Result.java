@@ -4,6 +4,7 @@ public class Result {
     private int userId;
     private String mode;
     private int grade;
+    private long timestamp;
 
     public int getUserId() {
         return userId;
@@ -36,12 +37,13 @@ public class Result {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
-
-    private long timestamp;
 }
 
 class Mistake {
     private String question;
+    private String userAnswer;
+    private String correctAnswer;
+    private int attemptsMade;
 
     public String getQuestion() {
         return question;
@@ -74,9 +76,5 @@ class Mistake {
     public void setAttemptsMade(int attemptsMade) {
         this.attemptsMade = attemptsMade;
     }
-
-    private String userAnswer;
-    private String correctAnswer;
-    private int attemptsMade;
 }
 

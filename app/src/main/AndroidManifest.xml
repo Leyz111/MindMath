@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MindMath">
         <activity
+            android:name=".AuthorizationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MindMath" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

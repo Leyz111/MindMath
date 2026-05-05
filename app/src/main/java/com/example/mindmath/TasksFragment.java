@@ -1,17 +1,16 @@
 package com.example.mindmath;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mindmath.tasks.Question;
 import com.example.mindmath.tasks.QuestionQueue;
@@ -26,24 +25,21 @@ import java.util.ArrayList;
  */
 public class TasksFragment extends Fragment {
 
-    MaterialButton nextButton, skipButton;
-    TextView questionNumberTextView, questionTextView, attemptsTextView;
-    EditText answerEditText;
-    ProgressBar progressBar;
-
-    Question q1 = new Question("2+2", "3");
-    Question q2 = new Question("3+2", "3");
-    Question q3 = new Question("4+2", "3");
-    Question q4 = new Question("5+2", "3");
-
-    ArrayList<Question> queue = new ArrayList<>();
-
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    MaterialButton nextButton, skipButton;
+    TextView questionNumberTextView, questionTextView, attemptsTextView;
+    EditText answerEditText;
+    ProgressBar progressBar;
+    Question q1 = new Question("2+2", "3");
+    Question q2 = new Question("3+2", "3");
+    Question q3 = new Question("4+2", "3");
+    Question q4 = new Question("5+2", "3");
+    ArrayList<Question> queue = new ArrayList<>();
+    int correctAnswers = 0;
+    QuestionQueue questionQueue;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -79,10 +75,6 @@ public class TasksFragment extends Fragment {
         }
     }
 
-    int correctAnswers = 0;
-
-    QuestionQueue questionQueue;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,7 +92,6 @@ public class TasksFragment extends Fragment {
         queue.add(q2);
         queue.add(q3);
         queue.add(q4);
-
 
         questionQueue = new QuestionQueue(queue);
 

@@ -2,6 +2,12 @@ package com.example.mindmath.tasks;
 
 public class Question {
     private String equation, answer;
+    private int attempts = 3;
+
+    public Question(String equation, String answer) {
+        this.equation = equation;
+        this.answer = answer;
+    }
 
     public int getAttempts() {
         return attempts;
@@ -9,13 +15,6 @@ public class Question {
 
     public void setAttempts(int attempts) {
         this.attempts = attempts;
-    }
-
-    private int attempts = 3;
-
-    public Question(String equation, String answer) {
-        this.equation = equation;
-        this.answer = answer;
     }
 
     public String getEquation() {

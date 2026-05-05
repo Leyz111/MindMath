@@ -2,6 +2,9 @@ package com.example.mindmath.result;
 
 public class NormalResult extends Result {
     private int totalQuestions;
+    private int correctAnswers;
+    private int wrongAnswers;
+    private long durationSeconds;
 
     public int getCorrectAnswers() {
         return correctAnswers;
@@ -34,9 +37,5 @@ public class NormalResult extends Result {
     public void setDurationSeconds(long durationSeconds) {
         this.durationSeconds = durationSeconds;
     }
-
-    private int correctAnswers;
-    private int wrongAnswers;
-    private long durationSeconds;
 
 }

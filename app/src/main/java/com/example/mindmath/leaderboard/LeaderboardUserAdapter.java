@@ -8,15 +8,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mindmath.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.mindmath.R;
-
 public class LeaderboardUserAdapter extends RecyclerView.Adapter<LeaderboardUserAdapter.UserViewHolder> {
 
-    private List<LeaderboardUser> userList;
+    private final List<LeaderboardUser> userList;
 
     public LeaderboardUserAdapter(List<LeaderboardUser> userList) {
         this.userList = (userList != null) ? userList : new ArrayList<>();

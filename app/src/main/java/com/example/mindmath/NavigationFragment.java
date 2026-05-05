@@ -1,24 +1,15 @@
 package com.example.mindmath;
 
-import android.animation.ValueAnimator;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.RectF;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Button;
-
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.shape.CornerFamily;
-import com.google.android.material.shape.ShapeAppearanceModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,8 +17,9 @@ import com.google.android.material.shape.ShapeAppearanceModel;
  * create an instance of this fragment.
  */
 public class NavigationFragment extends Fragment {
+    public Fragment currentFragment;
     MaterialButton homeButton, tasksButton, accountButton;
-
+    private MaterialButton currentlySelectedButton = null;
 
     public NavigationFragment() {
         // Required empty public constructor
@@ -38,62 +30,38 @@ public class NavigationFragment extends Fragment {
         return fragment;
     }
 
+    // Я очень сильно боюсь что за код ниже мне прилетит, но не важно, оно работает
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
 
-    // Я очень сильно боюсь что за код ниже мне прилетит, но не важно, оно работает
-
-    private void toggleSelected(MaterialButton button, boolean selected) {
-        if (selected) {
-            button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#35618e")));
-            animateCornerRadius(button, 30);
-        } else {
-            button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#73777f")));
-            animateCornerRadius(button, 5);
+    public void setSelectedItem(int itemId) {
+        if (itemId == R.id.btn_home) {
+            switchSelected(homeButton, tasksButton, accountButton);
+        } else if (itemId == R.id.btn_tasks) {
+            switchSelected(tasksButton, homeButton, accountButton);
+        } else if (itemId == R.id.btn_account) {
+            switchSelected(accountButton, homeButton, tasksButton);
         }
     }
 
     private void switchSelected(MaterialButton selected, MaterialButton unselected1, MaterialButton unselected2) {
-        toggleSelected(selected, true);
-        toggleSelected(unselected1, false);
-        toggleSelected(unselected2, false);
+        float density = getResources().getDisplayMetrics().density;
+        currentlySelectedButton = NavigationManager.switchSelected(currentlySelectedButton, selected, unselected1, unselected2, density);
     }
-
-    private void animateCornerRadius(MaterialButton button, int targetRadiusDp) {
-        float currentRadius = button.getShapeAppearanceModel().getBottomLeftCornerSize().getCornerSize(new RectF(0, 0, button.getWidth(), button.getHeight()));
-        float targetRadiusPx = targetRadiusDp * getResources().getDisplayMetrics().density;
-
-        ValueAnimator animator = ValueAnimator.ofFloat(currentRadius, targetRadiusPx);
-        animator.setDuration(150);
-        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        animator.addUpdateListener(animation -> {
-            float animatedValue = (float) animation.getAnimatedValue();
-            button.setShapeAppearanceModel(
-                    button.getShapeAppearanceModel()
-                            .toBuilder()
-                            .setAllCorners(CornerFamily.ROUNDED, animatedValue)
-                            .build()
-            );
-        });
-
-        animator.start();
-    }
-
-    public Fragment currentFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-
         View v = inflater.inflate(R.layout.fragment_navigation, container, false);
 
         loadFragment(new HomeFragment());
+        switchSelected(homeButton, tasksButton, accountButton);
 
         homeButton = v.findViewById(R.id.btn_home);
         tasksButton = v.findViewById(R.id.btn_tasks);
@@ -103,9 +71,8 @@ public class NavigationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (!(currentFragment instanceof HomeFragment)) {
-                    currentFragment = new HomeFragment();
-                    switchSelected(homeButton, tasksButton, accountButton);
                     loadFragment(new HomeFragment());
+                    switchSelected(homeButton, tasksButton, accountButton);
                 }
             }
         });
@@ -113,9 +80,8 @@ public class NavigationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (!(currentFragment instanceof TrainingListFragment)) {
-                    currentFragment = new TrainingListFragment();
-                    switchSelected(tasksButton, homeButton, accountButton);
                     loadFragment(new TrainingListFragment());
+                    switchSelected(tasksButton, homeButton, accountButton);
                 }
             }
         });
@@ -123,12 +89,12 @@ public class NavigationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (!(currentFragment instanceof AccountFragment)) {
-                    currentFragment = new AccountFragment();
-                    switchSelected(accountButton, homeButton, tasksButton);
                     loadFragment(new AccountFragment());
+                    switchSelected(accountButton, homeButton, tasksButton);
                 }
             }
         });
+
         return v;
     }
 
