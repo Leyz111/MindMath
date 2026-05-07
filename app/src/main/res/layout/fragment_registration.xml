@@ -46,7 +46,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/nameEditText"
+            android:id="@+id/regNameEditText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="8dp"
@@ -58,7 +58,7 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/loginEditText"
+            android:id="@+id/regEmailEditText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="8dp"
@@ -70,7 +70,7 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/passwordEditText"
+            android:id="@+id/regPasswordEditText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="8dp"
@@ -83,7 +83,7 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/passwordConfirmEditText"
+            android:id="@+id/regPasswordConfirmEditText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="15dp"

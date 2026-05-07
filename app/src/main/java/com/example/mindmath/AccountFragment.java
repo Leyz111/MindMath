@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import java.awt.font.TextAttribute;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +27,7 @@ public class AccountFragment extends Fragment {
     private String mParam1;
 
     View accountButton;
+    TextView accName;
     private String mParam2;
 
     public AccountFragment() {
@@ -62,9 +66,18 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_account, container, false);
-        
+
         accountButton = v.findViewById(R.id.accounts_settings);
-        
+        accName = v.findViewById(R.id.account_name);
+
+        LocalPerson currentUser = LocalPerson.getInstance();
+
+        if (accName != null && currentUser != null && currentUser.getName() != null) {
+            accName.setText(currentUser.getName());
+        } else if (accName != null) {
+            accName.setText("Гость");
+        }
+
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

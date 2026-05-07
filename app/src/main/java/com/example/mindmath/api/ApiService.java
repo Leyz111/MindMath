@@ -11,12 +11,15 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiService {
-    @POST("/api/results")
+    @POST("api/results")
     Call<Void> sendResult(@Body NormalResult result);
 
-    @POST("/api/persons")
+    @POST("api/persons")
     Call<Person> createPerson(@Body Person person);
 
-    @GET("/api/person")
+    @GET("api/persons")
     Call<List<Person>> getAllPerson();
+
+    @POST("api/persons/login")
+    Call<Person> login(@Body Person person);
 }

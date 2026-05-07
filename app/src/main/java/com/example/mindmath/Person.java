@@ -1,10 +1,14 @@
 package com.example.mindmath;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Person {
     private String name;
     private String role;
     private String login;
     private String password;
+
+    @SerializedName("top_result")
     private String topResult;
 
     public String getName() {

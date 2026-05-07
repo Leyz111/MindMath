@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/nameEditText"
+            android:id="@+id/authEmailEditText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="8dp"
@@ -43,7 +43,7 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/passwordEditText"
+            android:id="@+id/authPasswordEditText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="15dp"

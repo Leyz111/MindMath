@@ -7,10 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.mindmath.repository.PersonRepository;
+import com.example.mindmath.repository.RepositoryCallback;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +35,7 @@ public class AuthorizationFragment extends Fragment {
     private String mParam2;
 
     Button authorizationButton, toRegistrationButton;
+    EditText emailEditText, passwordEditText;
 
     public AuthorizationFragment() {
         // Required empty public constructor
@@ -61,6 +68,8 @@ public class AuthorizationFragment extends Fragment {
         }
     }
 
+    PersonRepository personRepository = new PersonRepository();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,11 +78,30 @@ public class AuthorizationFragment extends Fragment {
         toRegistrationButton = v.findViewById(R.id.toRegistrationButton);
         authorizationButton = v.findViewById(R.id.authorizationButton);
 
+        emailEditText = v.findViewById(R.id.authEmailEditText);
+        passwordEditText = v.findViewById(R.id.authPasswordEditText);
+
         authorizationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                String login = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+
+                personRepository.login(login, password, new RepositoryCallback<Person>() {
+                    @Override
+                    public void onSuccess(Person result) {
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+
+                        Toast.makeText(getContext(), result.getName(), Toast.LENGTH_SHORT).show();
+                        LocalPerson.getInstance().sync(result);
+                    }
+
+                    @Override
+                    public void onFail(String error) {
+                    }
+                });
             }
         });
 
@@ -83,7 +111,6 @@ public class AuthorizationFragment extends Fragment {
                 loadFragment(new RegistrationFragment());
             }
         });
-
 
         return v;
     }

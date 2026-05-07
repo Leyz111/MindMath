@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mindmath.leaderboard.LeaderboardUser;
 import com.example.mindmath.leaderboard.LeaderboardUserAdapter;
+import com.example.mindmath.repository.PersonRepository;
+import com.example.mindmath.repository.RepositoryCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +67,8 @@ public class LeadersFragment extends Fragment {
         }
     }
 
+    PersonRepository personRepository = new PersonRepository();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,9 +79,36 @@ public class LeadersFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<LeaderboardUser> userList = new ArrayList<>();
-        userList.add(new LeaderboardUser(1, "Иванов Иван"));
-        userList.add(new LeaderboardUser(2, "Иванов Ваня"));
-        userList.add(new LeaderboardUser(3, "кто то еще..."));
+
+        /*
+            Я очень сильно ненавижу мою лень конвертировать
+            LeaderboardUser в Person чтобы LeaderboardUserAdapter
+            мог нормально бы его прожевать, к тому же это абсолютно небезопасно,
+            но пока что сойдет.
+
+            Надо будет на беке и на фронте сделать отдельного человека, чтобы
+            присоединять его к таблице
+        */
+
+        personRepository.getAllPersons(new RepositoryCallback<List<Person>>() {
+            @Override
+            public void onSuccess(List<Person> result) {
+                List<LeaderboardUser> leaderboardList = new ArrayList<>();
+
+                for (int i = 0; i < result.size(); i++) {
+                    Person person = result.get(i);
+                    leaderboardList.add(new LeaderboardUser(i + 1, person.getName()));
+                }
+
+                LeaderboardUserAdapter adapter = new LeaderboardUserAdapter(leaderboardList);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFail(String error) {
+
+            }
+        });
 
         LeaderboardUserAdapter adapter = new LeaderboardUserAdapter(userList);
         try {

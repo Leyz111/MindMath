@@ -11,6 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.mindmath.repository.PersonRepository;
+import com.example.mindmath.repository.RepositoryCallback;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +28,8 @@ public class RegistrationFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    EditText nameEditText, emailEditText, passwordEditText, confirmPaswordEditText;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -61,6 +68,8 @@ public class RegistrationFragment extends Fragment {
         }
     }
 
+    PersonRepository personRepository = new PersonRepository();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,11 +78,60 @@ public class RegistrationFragment extends Fragment {
         toAuthButton = v.findViewById(R.id.toAuthorizationButton);
         registerButton = v.findViewById(R.id.registrationButton);
 
+        nameEditText = v.findViewById(R.id.regNameEditText);
+        emailEditText = v.findViewById(R.id.regEmailEditText);
+        passwordEditText = v.findViewById(R.id.regPasswordEditText);
+        confirmPaswordEditText = v.findViewById(R.id.regPasswordConfirmEditText);
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                if (nameEditText.getText().toString() == null) {}
+                if (emailEditText.getText().toString() == null) {}
+                if (passwordEditText.getText().toString() == null) {}
+                if (confirmPaswordEditText.getText().toString() == null) {}
+
+                if (!passwordEditText.getText().toString().equals(confirmPaswordEditText.getText().toString())) {
+
+                }
+
+                Person personToRegister = new Person();
+                personToRegister.setName(nameEditText.getText().toString());
+                personToRegister.setLogin(emailEditText.getText().toString());
+                personToRegister.setPassword(passwordEditText.getText().toString());
+                personToRegister.setRole("student");
+                personToRegister.setTopResult("1");
+
+                personRepository.createPerson(personToRegister, new RepositoryCallback<Person>() {
+                    @Override
+                    public void onSuccess(Person result) {
+                        personRepository.login(personToRegister.getLogin(), personToRegister.getPassword(), new RepositoryCallback<Person>() {
+                            @Override
+                            public void onSuccess(Person result) {
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+
+                                Toast.makeText(getContext(), result.getName(), Toast.LENGTH_SHORT).show();
+                                LocalPerson.getInstance().sync(result);
+                            }
+
+                            @Override
+                            public void onFail(String error) {
+                            }
+                        });
+
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+
+                    }
+
+                    @Override
+                    public void onFail(String error) {
+
+                    }
+                });
             }
         });
 
