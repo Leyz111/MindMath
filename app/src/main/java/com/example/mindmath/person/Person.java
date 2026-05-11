@@ -1,4 +1,4 @@
-package com.example.mindmath;
+package com.example.mindmath.person;
 
 import com.google.gson.annotations.SerializedName;
 

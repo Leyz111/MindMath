@@ -1,4 +1,4 @@
-package com.example.mindmath;
+package com.example.mindmath.leaderboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,8 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mindmath.leaderboard.LeaderboardUser;
-import com.example.mindmath.leaderboard.LeaderboardUserAdapter;
+import com.example.mindmath.HomeFragment;
+import com.example.mindmath.R;
+import com.example.mindmath.person.Person;
 import com.example.mindmath.repository.PersonRepository;
 import com.example.mindmath.repository.RepositoryCallback;
 

@@ -10,6 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mindmath.leaderboard.LeadersFragment;
+import com.example.mindmath.navigation.NavigationFragment;
+import com.example.mindmath.tasks.TrainingListFragment;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to

@@ -1,4 +1,4 @@
-package com.example.mindmath.tasks;
+package com.example.mindmath.questions;
 
 import java.util.ArrayList;
 

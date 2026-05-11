@@ -1,4 +1,4 @@
-package com.example.mindmath;
+package com.example.mindmath.navigation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mindmath.AccountFragment;
+import com.example.mindmath.HomeFragment;
+import com.example.mindmath.R;
+import com.example.mindmath.tasks.TrainingListFragment;
 import com.google.android.material.button.MaterialButton;
 
 /**

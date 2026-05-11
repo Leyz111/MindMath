@@ -16,7 +16,7 @@
         android:theme="@style/Theme.MindMath"
         android:networkSecurityConfig="@xml/network_security_config">
         <activity
-            android:name=".AuthorizationActivity"
+            android:name=".authorization.AuthorizationActivity"
             android:exported="false"
             android:theme="@style/Theme.MindMath" />
         <activity

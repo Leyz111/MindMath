@@ -1,6 +1,6 @@
 package com.example.mindmath.api;
 
-import com.example.mindmath.Person;
+import com.example.mindmath.person.Person;
 import com.example.mindmath.result.NormalResult;
 
 import java.util.List;

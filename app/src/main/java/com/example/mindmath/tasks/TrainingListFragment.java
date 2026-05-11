@@ -1,4 +1,4 @@
-package com.example.mindmath;
+package com.example.mindmath.tasks;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.mindmath.R;
 
 /**
  * A simple {@link Fragment} subclass.

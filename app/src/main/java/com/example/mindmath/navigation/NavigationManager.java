@@ -1,4 +1,4 @@
-package com.example.mindmath;
+package com.example.mindmath.navigation;
 
 import android.animation.ValueAnimator;
 import android.content.res.ColorStateList;

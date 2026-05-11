@@ -1,15 +1,13 @@
-package com.example.mindmath;
+package com.example.mindmath.authorization;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.example.mindmath.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
 import android.widget.Button;
 
 import androidx.core.graphics.Insets;
@@ -18,12 +16,6 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.mindmath.databinding.ActivityAuthorizationBinding;
 
 public class AuthorizationActivity extends AppCompatActivity {
 

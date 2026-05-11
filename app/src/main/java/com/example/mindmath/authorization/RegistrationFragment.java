@@ -1,4 +1,4 @@
-package com.example.mindmath;
+package com.example.mindmath.authorization;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mindmath.Hasher;
+import com.example.mindmath.MainActivity;
+import com.example.mindmath.R;
+import com.example.mindmath.person.LocalPerson;
+import com.example.mindmath.person.Person;
 import com.example.mindmath.repository.PersonRepository;
 import com.example.mindmath.repository.RepositoryCallback;
 
@@ -96,11 +101,11 @@ public class RegistrationFragment extends Fragment {
                 }
 
                 Person personToRegister = new Person();
-                personToRegister.setName(nameEditText.getText().toString());
-                personToRegister.setLogin(emailEditText.getText().toString());
-                personToRegister.setPassword(passwordEditText.getText().toString());
+                personToRegister.setName(nameEditText.getText().toString().trim());
+                personToRegister.setLogin(emailEditText.getText().toString().trim());
+                personToRegister.setPassword(Hasher.hashString(passwordEditText.getText().toString().trim(), emailEditText.getText().toString().trim()));
                 personToRegister.setRole("student");
-                personToRegister.setTopResult("1");
+                personToRegister.setTopResult("0");
 
                 personRepository.createPerson(personToRegister, new RepositoryCallback<Person>() {
                     @Override
@@ -114,6 +119,7 @@ public class RegistrationFragment extends Fragment {
 
                                 Toast.makeText(getContext(), result.getName(), Toast.LENGTH_SHORT).show();
                                 LocalPerson.getInstance().sync(result);
+                                LocalPerson.getInstance().saveToShaSharedPreferences(requireContext());
                             }
 
                             @Override
@@ -124,7 +130,7 @@ public class RegistrationFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
                         getActivity().finish();
-
+                        System.gc();
                     }
 
                     @Override

@@ -1,4 +1,4 @@
-package com.example.mindmath;
+package com.example.mindmath.tasks;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,8 +12,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.mindmath.tasks.Question;
-import com.example.mindmath.tasks.QuestionQueue;
+import com.example.mindmath.R;
+import com.example.mindmath.person.LocalPerson;
+import com.example.mindmath.questions.Question;
+import com.example.mindmath.questions.QuestionGenerator;
+import com.example.mindmath.questions.QuestionQueue;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -33,10 +36,6 @@ public class TasksFragment extends Fragment {
     TextView questionNumberTextView, questionTextView, attemptsTextView;
     EditText answerEditText;
     ProgressBar progressBar;
-    Question q1 = new Question("2+2", "3");
-    Question q2 = new Question("3+2", "3");
-    Question q3 = new Question("4+2", "3");
-    Question q4 = new Question("5+2", "3");
     ArrayList<Question> queue = new ArrayList<>();
     int correctAnswers = 0;
     QuestionQueue questionQueue;
@@ -88,10 +87,9 @@ public class TasksFragment extends Fragment {
         attemptsTextView = view.findViewById(R.id.attemptsTextView);
         progressBar = view.findViewById(R.id.progressBar);
 
-        queue.add(q1);
-        queue.add(q2);
-        queue.add(q3);
-        queue.add(q4);
+        for (int i = 0; i < 10; i++) {
+            queue.add(QuestionGenerator.generate());
+        }
 
         questionQueue = new QuestionQueue(queue);
 
@@ -109,6 +107,7 @@ public class TasksFragment extends Fragment {
                 if (userInput.equals(current.getAnswer())) {
                     questionQueue.nextQuestion();
                     answerEditText.setText("");
+                    attemptsTextView.setText("");
 
                     Question next = questionQueue.getCurrentQuestion();
 
@@ -120,6 +119,7 @@ public class TasksFragment extends Fragment {
                         updateQuestion(questionTextView, next.getEquation());
                         attemptsTextView.setText("");
                     } else {
+                        LocalPerson.getInstance().setTopResult(String.valueOf(Integer.parseInt(LocalPerson.getInstance().getTopResult()) + correctAnswers));
                         loadFragment(new TaskStatsFragment());
                     }
                 } else {
@@ -132,8 +132,12 @@ public class TasksFragment extends Fragment {
 
                         Question next = questionQueue.getCurrentQuestion();
                         if (next != null) {
+
                             updateQuestion(questionTextView, next.getEquation());
+                            attemptsTextView.setText("");
+
                         } else {
+                            LocalPerson.getInstance().setTopResult(String.valueOf(Integer.parseInt(LocalPerson.getInstance().getTopResult()) + correctAnswers));
                             loadFragment(new TaskStatsFragment());
                         }
                     } else {

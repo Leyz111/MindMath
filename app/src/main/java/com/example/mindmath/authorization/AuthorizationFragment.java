@@ -1,13 +1,14 @@
-package com.example.mindmath;
+package com.example.mindmath.authorization;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mindmath.Hasher;
+import com.example.mindmath.MainActivity;
+import com.example.mindmath.R;
+import com.example.mindmath.person.LocalPerson;
+import com.example.mindmath.person.Person;
 import com.example.mindmath.repository.PersonRepository;
 import com.example.mindmath.repository.RepositoryCallback;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +44,8 @@ public class AuthorizationFragment extends Fragment {
 
     Button authorizationButton, toRegistrationButton;
     EditText emailEditText, passwordEditText;
+
+    SharedPreferences sharedPreferences;
 
     public AuthorizationFragment() {
         // Required empty public constructor
@@ -85,7 +95,7 @@ public class AuthorizationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String login = emailEditText.getText().toString().trim();
-                String password = passwordEditText.getText().toString().trim();
+                String password = Hasher.hashString(passwordEditText.getText().toString().trim(), emailEditText.getText().toString().trim());
 
                 personRepository.login(login, password, new RepositoryCallback<Person>() {
                     @Override
@@ -96,6 +106,7 @@ public class AuthorizationFragment extends Fragment {
 
                         Toast.makeText(getContext(), result.getName(), Toast.LENGTH_SHORT).show();
                         LocalPerson.getInstance().sync(result);
+                        LocalPerson.getInstance().saveToShaSharedPreferences(requireContext());
                     }
 
                     @Override

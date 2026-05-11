@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import java.awt.font.TextAttribute;
+import com.example.mindmath.authorization.AuthorizationActivity;
+import com.example.mindmath.person.LocalPerson;
 
 /**
  * A simple {@link Fragment} subclass.

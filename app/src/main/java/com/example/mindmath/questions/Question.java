@@ -1,4 +1,4 @@
-package com.example.mindmath.tasks;
+package com.example.mindmath.questions;
 
 public class Question {
     private String equation, answer;

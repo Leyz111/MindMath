@@ -1,6 +1,6 @@
 package com.example.mindmath.repository;
 
-import com.example.mindmath.Person;
+import com.example.mindmath.person.Person;
 import com.example.mindmath.api.ApiService;
 import com.example.mindmath.api.RetrofitClient;
 
