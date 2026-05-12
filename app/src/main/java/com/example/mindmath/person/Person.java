@@ -8,6 +8,16 @@ public class Person {
     private String login;
     private String password;
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @SerializedName("top_result")
     private String topResult;
 

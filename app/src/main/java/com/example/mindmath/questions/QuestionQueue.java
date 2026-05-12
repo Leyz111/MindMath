@@ -7,6 +7,8 @@ public class QuestionQueue {
     private final ArrayList<Question> skippedQueue = new ArrayList<>();
     private Question currentQuestion;
 
+    private int progress;
+
     private int questionNumber = 0;
 
     public QuestionQueue(ArrayList<Question> questions) {
@@ -37,6 +39,14 @@ public class QuestionQueue {
         } else {
             currentQuestion = null;
         }
+    }
+
+    public int getProgress() {
+        return (questionNumber / mainQueue.size()) * 100;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
 
     public int getQuestionNumber() {

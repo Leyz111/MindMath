@@ -14,6 +14,8 @@ public class LocalPerson extends Person {
     private static final String SP_ROLE = "role";
     private static final String SP_TOP_RESULT = "top_result";
 
+    private static final String SP_ID = "id";
+
 
     public static LocalPerson getInstance() {
         if (instance == null) {
@@ -28,6 +30,7 @@ public class LocalPerson extends Person {
         this.setPassword(serverPerson.getPassword());
         this.setRole(serverPerson.getRole());
         this.setTopResult(serverPerson.getTopResult());
+        this.setId(serverPerson.getId());
     }
 
     public void loadFromSharedPreferences(Context context) {
@@ -38,6 +41,7 @@ public class LocalPerson extends Person {
         setPassword(preferences.getString(SP_PASSWORD, "null"));
         setRole(preferences.getString(SP_ROLE, "null"));
         setTopResult(preferences.getString(SP_TOP_RESULT, "0"));
+        setId(preferences.getLong(SP_ID, 0));
     }
 
     public void saveToShaSharedPreferences(Context context) {
@@ -49,6 +53,7 @@ public class LocalPerson extends Person {
         editor.putString(SP_PASSWORD, getPassword());
         editor.putString(SP_ROLE, getRole());
         editor.putString(SP_TOP_RESULT, getTopResult());
+        editor.putLong(SP_ID, getId());
 
         editor.apply();
     }

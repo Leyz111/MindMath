@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,9 +15,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mindmath.R;
 import com.example.mindmath.person.LocalPerson;
+import com.example.mindmath.person.Person;
 import com.example.mindmath.questions.Question;
 import com.example.mindmath.questions.QuestionGenerator;
 import com.example.mindmath.questions.QuestionQueue;
+import com.example.mindmath.repository.PersonRepository;
+import com.example.mindmath.repository.RepositoryCallback;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -74,6 +78,8 @@ public class TasksFragment extends Fragment {
         }
     }
 
+    PersonRepository personRepository = new PersonRepository();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -120,6 +126,20 @@ public class TasksFragment extends Fragment {
                         attemptsTextView.setText("");
                     } else {
                         LocalPerson.getInstance().setTopResult(String.valueOf(Integer.parseInt(LocalPerson.getInstance().getTopResult()) + correctAnswers));
+
+                        personRepository.updatePerson(LocalPerson.getInstance(), new RepositoryCallback<Person>() {
+                            @Override
+                            public void onSuccess(Person result) {
+                                Toast.makeText(getContext(), LocalPerson.getInstance().getTopResult().toString(), Toast.LENGTH_SHORT).show();
+                                LocalPerson.getInstance().saveToShaSharedPreferences(getContext());
+                            }
+
+                            @Override
+                            public void onFail(String error) {
+
+                            }
+                        });
+
                         loadFragment(new TaskStatsFragment());
                     }
                 } else {
@@ -132,16 +152,29 @@ public class TasksFragment extends Fragment {
 
                         Question next = questionQueue.getCurrentQuestion();
                         if (next != null) {
-
                             updateQuestion(questionTextView, next.getEquation());
                             attemptsTextView.setText("");
-
                         } else {
                             LocalPerson.getInstance().setTopResult(String.valueOf(Integer.parseInt(LocalPerson.getInstance().getTopResult()) + correctAnswers));
+
+
+                            personRepository.updatePerson(LocalPerson.getInstance(), new RepositoryCallback<Person>() {
+                                @Override
+                                public void onSuccess(Person result) {
+                                    Toast.makeText(getContext(), LocalPerson.getInstance().getTopResult().toString(), Toast.LENGTH_SHORT).show();
+                                    LocalPerson.getInstance().saveToShaSharedPreferences(getContext());
+                                }
+
+                                @Override
+                                public void onFail(String error) {
+
+                                }
+                            });
+
                             loadFragment(new TaskStatsFragment());
                         }
                     } else {
-                        attemptsTextView.setText(String.valueOf(attempts));
+                        attemptsTextView.setText("Осталось попыток: " + String.valueOf(attempts));
                     }
                 }
             }

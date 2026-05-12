@@ -9,6 +9,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface ApiService {
     @POST("api/results")
@@ -16,6 +18,12 @@ public interface ApiService {
 
     @POST("api/persons")
     Call<Person> createPerson(@Body Person person);
+
+    @PUT("api/persons/{id}")
+    Call<Person> updatePerson(
+            @Path("id") Long id,
+            @Body Person personDetails
+    );
 
     @GET("api/persons")
     Call<List<Person>> getAllPerson();

@@ -35,6 +35,24 @@ public class PersonRepository {
         });
     }
 
+    public void updatePerson(Person person, RepositoryCallback<Person> callback) {
+        apiService.updatePerson(person.getId(), person).enqueue(new Callback<Person>() {
+            @Override
+            public void onResponse(Call<Person> call, Response<Person> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onFail(String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Person> call, Throwable throwable) {
+                callback.onFail(throwable.getMessage());
+            }
+        });
+    }
+
     public void getAllPersons(RepositoryCallback<List<Person>> callback) {
         apiService.getAllPerson().enqueue(new Callback<List<Person>>() {
             @Override
@@ -64,9 +82,9 @@ public class PersonRepository {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onSuccess(response.body());
                 } else if (response.code() == 401) {
-                    callback.onFail("Неверный логин или пароль");
+                    callback.onFail("wrong_credentials");
                 } else {
-                    callback.onFail("Ошибка сервера: " + response.code());
+                    callback.onFail(String.valueOf(response.code()));
                 }
             }
 

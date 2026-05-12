@@ -1,5 +1,7 @@
 package com.example.mindmath;
 
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -7,10 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentContainerView;
 
 import com.example.mindmath.person.LocalPerson;
 
 public class MainActivity extends AppCompatActivity {
+    FragmentContainerView offlineFragmentContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        LocalPerson.getInstance().loadFromSharedPreferences(this);
+        offlineFragmentContainer = findViewById(R.id.offlineFragmentContainer);
+
+        if (!ConnectionStatus.getInstance().getStatus().equals("OK")) {
+            offlineFragmentContainer.setVisibility(VISIBLE);
+        }
     }
 }
