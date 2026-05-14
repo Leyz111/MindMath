@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mindmath.authorization.AuthorizationActivity;
 import com.example.mindmath.person.LocalPerson;
@@ -30,7 +32,7 @@ public class AccountFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
 
-    View accountButton, accessibilityButton;
+    View accountButton, accessibilityButton, profileButton;
     TextView accName;
     private String mParam2;
 
@@ -74,7 +76,7 @@ public class AccountFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_account, container, false);
 
         accountButton = v.findViewById(R.id.accounts_settings);
-        accessibilityButton = v.findViewById(R.id.accesibility_settings);
+        profileButton = v.findViewById(R.id.profile_settings);
 
         accName = v.findViewById(R.id.account_name);
 
@@ -94,13 +96,22 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        accessibilityButton.setOnClickListener(new View.OnClickListener() {
+        profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                loadFragment(new ProfileFragment());
             }
         });
 
         return v;
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fm = getParentFragmentManager();
+
+        fm.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
     }
 }

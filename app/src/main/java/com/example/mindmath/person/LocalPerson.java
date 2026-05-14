@@ -16,7 +16,6 @@ public class LocalPerson extends Person {
 
     private static final String SP_ID = "id";
 
-
     public static LocalPerson getInstance() {
         if (instance == null) {
             instance = new LocalPerson();

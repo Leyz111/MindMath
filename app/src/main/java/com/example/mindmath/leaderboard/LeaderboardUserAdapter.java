@@ -34,7 +34,7 @@ public class LeaderboardUserAdapter extends RecyclerView.Adapter<LeaderboardUser
         LeaderboardUser user = userList.get(position);
 
         holder.tvRank.setText(String.valueOf(user.getRank()));
-        holder.tvName.setText(user.getName());
+        holder.tvName.setText(user.getName() + "    Счет:   " + user.getScore());
     }
 
     @Override

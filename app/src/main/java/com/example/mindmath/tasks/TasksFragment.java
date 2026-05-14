@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.example.mindmath.repository.RepositoryCallback;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +40,8 @@ public class TasksFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     MaterialButton nextButton, skipButton;
     TextView questionNumberTextView, questionTextView, attemptsTextView;
+
+    Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button0, backButton;
     EditText answerEditText;
     ProgressBar progressBar;
     ArrayList<Question> queue = new ArrayList<>();
@@ -93,7 +97,19 @@ public class TasksFragment extends Fragment {
         attemptsTextView = view.findViewById(R.id.attemptsTextView);
         progressBar = view.findViewById(R.id.progressBar);
 
-        for (int i = 0; i < 10; i++) {
+        button0 = view.findViewById(R.id.button0);
+        button1 = view.findViewById(R.id.button1);
+        button2 = view.findViewById(R.id.button2);
+        button3 = view.findViewById(R.id.button3);
+        button4 = view.findViewById(R.id.button4);
+        button5 = view.findViewById(R.id.button5);
+        button6 = view.findViewById(R.id.button6);
+        button7 = view.findViewById(R.id.button7);
+        button8 = view.findViewById(R.id.button8);
+        button9 = view.findViewById(R.id.button9);
+        backButton = view.findViewById(R.id.buttonBack);
+
+        for (int i = 0; i < 3; i++) {
             queue.add(QuestionGenerator.generate());
         }
 
@@ -131,7 +147,7 @@ public class TasksFragment extends Fragment {
                             @Override
                             public void onSuccess(Person result) {
                                 Toast.makeText(getContext(), LocalPerson.getInstance().getTopResult().toString(), Toast.LENGTH_SHORT).show();
-                                LocalPerson.getInstance().saveToShaSharedPreferences(getContext());
+                                LocalPerson.getInstance().saveToShaSharedPreferences(requireContext());
                             }
 
                             @Override
@@ -162,7 +178,7 @@ public class TasksFragment extends Fragment {
                                 @Override
                                 public void onSuccess(Person result) {
                                     Toast.makeText(getContext(), LocalPerson.getInstance().getTopResult().toString(), Toast.LENGTH_SHORT).show();
-                                    LocalPerson.getInstance().saveToShaSharedPreferences(getContext());
+                                    LocalPerson.getInstance().saveToShaSharedPreferences(requireContext());
                                 }
 
                                 @Override
@@ -185,6 +201,85 @@ public class TasksFragment extends Fragment {
             public void onClick(View view) {
                 questionQueue.skipCurrentQuestion();
                 updateQuestion(questionTextView, questionQueue.getCurrentQuestion().getEquation());
+            }
+        });
+
+        button0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answerEditText.setText(answerEditText.getText() + "0");
+            }
+        });
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answerEditText.setText(answerEditText.getText() + "1");
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answerEditText.setText(answerEditText.getText() + "2");
+            }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answerEditText.setText(answerEditText.getText() + "3");
+            }
+        });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answerEditText.setText(answerEditText.getText() + "4");
+            }
+        });
+
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answerEditText.setText(answerEditText.getText() + "5");
+            }
+        });
+
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answerEditText.setText(answerEditText.getText() + "6");
+            }
+        });
+
+        button7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answerEditText.setText(answerEditText.getText() + "7");
+            }
+        });
+
+        button8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answerEditText.setText(answerEditText.getText() + "8");
+            }
+        });
+
+        button9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answerEditText.setText(answerEditText.getText() + "9");
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!answerEditText.getText().toString().isEmpty()) {
+                    answerEditText.setText(answerEditText.getText().toString().substring(0, answerEditText.getText().toString().length() - 1));
+                }
             }
         });
 

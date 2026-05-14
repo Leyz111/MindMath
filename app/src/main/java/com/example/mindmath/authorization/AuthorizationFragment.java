@@ -100,13 +100,14 @@ public class AuthorizationFragment extends Fragment {
                 personRepository.login(login, password, new RepositoryCallback<Person>() {
                     @Override
                     public void onSuccess(Person result) {
+                        Toast.makeText(getContext(), result.getName(), Toast.LENGTH_SHORT).show();
+                        LocalPerson.getInstance().sync(result);
+                        LocalPerson.getInstance().setPassword(passwordEditText.getText().toString().trim());
+                        LocalPerson.getInstance().saveToShaSharedPreferences(requireContext());
+
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
                         getActivity().finish();
-
-                        Toast.makeText(getContext(), result.getName(), Toast.LENGTH_SHORT).show();
-                        LocalPerson.getInstance().sync(result);
-                        LocalPerson.getInstance().saveToShaSharedPreferences(requireContext());
                     }
 
                     @Override

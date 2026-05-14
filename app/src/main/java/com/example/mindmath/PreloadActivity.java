@@ -34,10 +34,10 @@ public class PreloadActivity extends AppCompatActivity {
 
         PersonRepository personRepository = new PersonRepository();
 
-        if (LocalPerson.getInstance().getName().equals("null") || LocalPerson.getInstance().getPassword().equals("null")) {
+        if (LocalPerson.getInstance().getLogin().equals("null") || LocalPerson.getInstance().getPassword().equals("null")) {
             goToActivity(AuthorizationActivity.class);
         } else {
-            personRepository.login(LocalPerson.getInstance().getName(), LocalPerson.getInstance().getPassword(), new RepositoryCallback<Person>() {
+            personRepository.login(LocalPerson.getInstance().getLogin(), Hasher.hashString(LocalPerson.getInstance().getPassword(), LocalPerson.getInstance().getLogin()), new RepositoryCallback<Person>() {
                 @Override
                 public void onSuccess(Person result) {
                     goToActivity(MainActivity.class);

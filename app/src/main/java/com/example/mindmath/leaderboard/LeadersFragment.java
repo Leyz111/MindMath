@@ -19,6 +19,8 @@ import com.example.mindmath.repository.PersonRepository;
 import com.example.mindmath.repository.RepositoryCallback;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -96,11 +98,12 @@ public class LeadersFragment extends Fragment {
             public void onSuccess(List<Person> result) {
                 List<LeaderboardUser> leaderboardList = new ArrayList<>();
 
+                result.sort(Comparator.comparingInt((Person p) -> Integer.parseInt(p.getTopResult())).reversed());
+
                 for (int i = 0; i < result.size(); i++) {
                     Person person = result.get(i);
-                    leaderboardList.add(new LeaderboardUser(i + 1, person.getName()));
+                    leaderboardList.add(new LeaderboardUser(i + 1, person.getName(), Integer.parseInt(person.getTopResult())));
                 }
-
                 LeaderboardUserAdapter adapter = new LeaderboardUserAdapter(leaderboardList);
                 recyclerView.setAdapter(adapter);
             }
