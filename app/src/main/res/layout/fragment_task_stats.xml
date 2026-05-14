@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="4dp"
+    android:layout_marginHorizontal="8dp"
     android:orientation="vertical">
 
     <TextView
@@ -208,7 +208,7 @@
             app:iconTint="#FFFFFF" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/nextButton"
+            android:id="@+id/nextTrainButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="4dp"

@@ -48,6 +48,7 @@
             android:layout_marginBottom="15dp"
             android:backgroundTint="@color/primary"
             android:text="Изменить"
+            android:textColor="#FFFFFF"
             app:cornerRadius="5dp" />
 
         <EditText
@@ -68,6 +69,7 @@
             android:layout_height="60dp"
             android:backgroundTint="@color/primary"
             android:text="Изменить"
+            android:textColor="#FFFFFF"
             app:cornerRadius="5dp" />
 
     </LinearLayout>
