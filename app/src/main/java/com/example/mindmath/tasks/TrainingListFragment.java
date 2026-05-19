@@ -23,7 +23,7 @@ public class TrainingListFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    Button toTasksButton;
+    Button toTasksButton, toHardTasksButton, toGeneralTasksButton;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -65,11 +65,27 @@ public class TrainingListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_training_list, container, false);
 
         toTasksButton = v.findViewById(R.id.btn_training_1);
+        toGeneralTasksButton = v.findViewById(R.id.btn_training_2);
+        toHardTasksButton = v.findViewById(R.id.btn_training_3);
 
         toTasksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loadFragment(new TasksFragment());
+            }
+        });
+
+        toGeneralTasksButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new GeneralTaskFragment());
+            }
+        });
+
+        toHardTasksButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new HardTaskFragment());
             }
         });
 
