@@ -87,7 +87,14 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 LocalPerson.getInstance().setName(nameET.getText().toString());
 
-                personRepository.updatePerson(LocalPerson.getInstance(), new RepositoryCallback<Person>() {
+                Person personToUpdate = new Person();
+                personToUpdate.setLogin(LocalPerson.getInstance().getLogin());
+                personToUpdate.setPassword(Hasher.hashString(LocalPerson.getInstance().getPassword(), personToUpdate.getLogin()));
+                personToUpdate.setName(LocalPerson.getInstance().getName());
+                personToUpdate.setRole(LocalPerson.getInstance().getRole());
+                personToUpdate.setTopResult(LocalPerson.getInstance().getTopResult());
+
+                personRepository.updatePerson(personToUpdate, new RepositoryCallback<Person>() {
                     @Override
                     public void onSuccess(Person result) {
                         LocalPerson.getInstance().saveToShaSharedPreferences(requireContext());

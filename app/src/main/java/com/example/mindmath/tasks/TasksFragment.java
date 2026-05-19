@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mindmath.Hasher;
 import com.example.mindmath.R;
 import com.example.mindmath.person.LocalPerson;
 import com.example.mindmath.person.Person;
@@ -143,7 +144,14 @@ public class TasksFragment extends Fragment {
                     } else {
                         LocalPerson.getInstance().setTopResult(String.valueOf(Integer.parseInt(LocalPerson.getInstance().getTopResult()) + correctAnswers));
 
-                        personRepository.updatePerson(LocalPerson.getInstance(), new RepositoryCallback<Person>() {
+                        Person personToUpdate = new Person();
+                        personToUpdate.setLogin(LocalPerson.getInstance().getLogin());
+                        personToUpdate.setPassword(Hasher.hashString(LocalPerson.getInstance().getPassword(), personToUpdate.getLogin()));
+                        personToUpdate.setName(LocalPerson.getInstance().getName());
+                        personToUpdate.setRole(LocalPerson.getInstance().getRole());
+                        personToUpdate.setTopResult(LocalPerson.getInstance().getTopResult());
+
+                        personRepository.updatePerson(personToUpdate, new RepositoryCallback<Person>() {
                             @Override
                             public void onSuccess(Person result) {
                                 Toast.makeText(getContext(), LocalPerson.getInstance().getTopResult().toString(), Toast.LENGTH_SHORT).show();
@@ -173,8 +181,14 @@ public class TasksFragment extends Fragment {
                         } else {
                             LocalPerson.getInstance().setTopResult(String.valueOf(Integer.parseInt(LocalPerson.getInstance().getTopResult()) + correctAnswers));
 
+                            Person personToUpdate = new Person();
+                            personToUpdate.setLogin(LocalPerson.getInstance().getLogin());
+                            personToUpdate.setPassword(Hasher.hashString(LocalPerson.getInstance().getPassword(), personToUpdate.getLogin()));
+                            personToUpdate.setName(LocalPerson.getInstance().getName());
+                            personToUpdate.setRole(LocalPerson.getInstance().getRole());
+                            personToUpdate.setTopResult(LocalPerson.getInstance().getTopResult());
 
-                            personRepository.updatePerson(LocalPerson.getInstance(), new RepositoryCallback<Person>() {
+                            personRepository.updatePerson(personToUpdate, new RepositoryCallback<Person>() {
                                 @Override
                                 public void onSuccess(Person result) {
                                     Toast.makeText(getContext(), LocalPerson.getInstance().getTopResult().toString(), Toast.LENGTH_SHORT).show();
